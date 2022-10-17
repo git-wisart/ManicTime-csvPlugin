@@ -1,0 +1,10 @@
+﻿{
+  "Id": "Wizart.ManicTime.CsvPlugin",
+  "Version": "1.0.0.0",
+  "Type": "Timeline",
+  "AssemblyName": "Wizart.ManicTime.CsvPlugin.dll",
+  "Name": "ManicTime csvPlugin",
+  "Description": "Show data from csv file on its own timeline",
+  "HelpUrl": "https://github.com/git-wisart/ManicTime-csvPlugin",
+  "MinHostVersion": "4.6.2"
+}

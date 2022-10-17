@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+	<TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>Wizart.ManicTime.CsvPlugin</RootNamespace>
+    <AssemblyName>Wizart.ManicTime.CsvPlugin</AssemblyName>
+
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <BaseOutputPath>$(ProjectDir)\installable-plugin</BaseOutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\installable-plugin\$(Configuration)\Plugins\Packages\Wizart.ManicTime.CsvPlugin\Lib\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\installable-plugin\$(Configuration)\Plugins\Packages\Wizart.ManicTime.CsvPlugin\Lib\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+    <Page Remove="Properties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Images\SourceImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="PluginIcon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="PluginSpec.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Finkit.ManicTime.Client">
+      <HintPath>..\lib\Finkit.ManicTime.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Finkit.ManicTime.Common">
+      <HintPath>..\lib\Finkit.ManicTime.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Finkit.ManicTime.Shared">
+      <HintPath>..\lib\Finkit.ManicTime.Shared.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;$(ProjectDir)PluginSpec.json&quot; &quot;$(TargetDir)..\PluginSpec.json&quot;&#xD;&#xA;copy &quot;$(ProjectDir)PluginIcon.png&quot; &quot;$(TargetDir)..\PluginIcon.png&quot;&#xD;&#xA;del &quot;$(TargetDir)Finkit.ManicTime.Client.dll&quot;&#xD;&#xA;del &quot;$(TargetDir)Finkit.ManicTime.Common.dll&quot;&#xD;&#xA;del &quot;$(TargetDir)Finkit.ManicTime.Shared.dll&quot;&#xD;&#xA;rmdir /S /Q &quot;$(TargetDir)ref" />
+  </Target>
+
+</Project>
